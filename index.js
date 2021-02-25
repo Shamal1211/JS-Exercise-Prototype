@@ -39,11 +39,26 @@ function Airplane(name) {
           + It should return a string with `name` and `age`. Example: "Mary, 50"
   */
   
- function Person() {
+ function Person(name, age) {
+
+  this.name = name; 
+  this.age = age;
+  this.stomach = [];
     
   }
+  Person.prototype.eat = function(edible) {
+    if(this.stomach.length < 20) {
+      this.stomach.push(edible);
+    }
+  }
+
+  Person.prototype.poop = function () {
+    this.stomach = [];
+  }
  
- 
+ Person.prototype.toString = function (){
+   return `${this.name}, ${this.age}`;
+ }
 
   
   
@@ -64,8 +79,18 @@ function Airplane(name) {
   */
   
  function Car() {
-    
+
+  function Car(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
   }
+   Car.prototype.fill = function(gallons) {
+     return this.tank = this.tank + gallons;
+
+   } 
+ }
   
   
   /*
@@ -76,17 +101,24 @@ function Airplane(name) {
           + Should return a string "Playing with x", x being the favorite toy.
   */
  function Baby() {
-   
+   function Baby(name, age, favoriteToy){
+     Person.call(this, name, age);
+     this.favoriteToy = favoriteToy;
+   }
+   Baby.prototype = Object.create(Person.prototype);
+   Baby.prototype.play = function(){
+     return `Playing with ${this.favoriteToy}`;
+   }
   }
  
   
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. Explicit: Making constructors stay together by asking new children to share information with one another.
+    2. New binding: Make constructors so others confirm others are made to notify its keys.
+    3. Global binding: Summons all JavaScript on console.log.
+    4. Implicit binding: calls functions.
   */
   
   
